@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Solution {
     public static class Match{
-    	private List<Boolean> stones;
+        private List<Boolean> stones;
 
         public Match(){
             this.stones = new ArrayList<Boolean>();
@@ -15,17 +15,11 @@ public class Solution {
         }
 
         public Boolean check(Integer value){
-            if(this.stones.size() >= value){
-              return this.stones.get(value - 1);
+            for (int i = this.stones.size(); i <= value; i++) {
+                this.stones.add(!(this.stones.get(i - 2) && this.stones.get(i - 3) && this.stones.get(i - 5)));
             }
-            Integer pos = this.stones.size() - 1;
-            if(this.stones.get(pos) &&  this.stones.get(pos - 2) && this.stones.get(pos -4)){
-                this.stones.add(false);
-                return check(value);
-            }
-            this.stones.add(true);
-            return check(value);
-        }
+            return this.stones.get(value-1);
+	}
     }
 
     public static void main(String[] args) {
